@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+
+  <main>
+
+
+    <div class="navigation nav-four">
+      <div class="choise">
+        <a href="">1</a>
+        <div class="info">
+          <p>Step 1</p>
+          <h4>Your info</h4>
+        </div>
+      </div>
+
+      <div class="choise">
+        <a href="">2</a>
+        <div class="info">
+          <p>Step 2</p>
+          <h4>Select plan</h4>
+        </div>
+      </div>
+      
+      <div class="choise">
+        <a href="">3</a>
+        <div class="info">
+          <p>Step 3</p>
+          <h4>Add-ons</h4>
+        </div>
+      </div>
+
+      <div class="choise">
+        <a href="" class="active">4</a>
+        <div class="info">
+          <p>Step 4</p>
+          <h4>Summary</h4>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section class="content">
+      <div class="header header_four">
+        <h1>Finishing up</h1>
+        <p>Double-check everything looks OK before confirming.</p>
+      </div>
+
+
+      <div class="collecte">
+        <div class="plane">
+          <h1 class="name" id="plan_name">Something <span id="plan_season">(Season)</span></h1>
+          <h1 id="plan_price">+$90/yr</h1>
+        </div>
+        <a href="stem_two.html">Change</a>
+
+        <hr>
+
+        <div class="feature">
+          <ul id="feature_container">
+            <!-- <li>
+              <p class="name">Online service</p>
+              <p class="price">+$10/yr</p>
+            </li>
+            <li>
+              <p class="name">Larger storage</p>
+              <p class="price">+$20/yr</p>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="sum">
+        <p>Total (per year)</p>
+        <h1 id="total">$120/yr</h1>
+      </div>
+
+
+      <div class="convey">
+        <a href="step_three.html">Go Back</a>
+        <a href="step_five.html"><button>Confirm</button></a>
+      </div>
+    </section>
+
+
+
+  </main>
+
+
+  <script>
+
+    const plan_name = document.getElementById("plan_name");
+    plan_name.innerHTML = `${window.localStorage.getItem("planName")} (${window.localStorage.getItem("tog")})`;
+
+    const plan_price = document.getElementById("plan_price");
+    let slicecIt = localStorage.getItem("planPrice").slice(localStorage.getItem("planPrice").indexOf("$") + 1, localStorage.getItem("planPrice").indexOf("/"));
+    plan_price.innerHTML = `$${localStorage.getItem("tog") == "monthly" ? slicecIt + "/mo" : slicecIt * 10 + "/yr"}`;
+
+
+    const feature = document.querySelector(".collecte .feature ul");
+    console.log(feature);
+
+    if(window.sessionStorage.getItem("addsName1")) {
+      let li = document.createElement("li");
+      let p1 = document.createElement("p");
+      p1.className = "name";
+      p1.innerText = window.sessionStorage.getItem("addsName1");
+      let p2 = document.createElement("p");
+      p2.className = "price";
+      p2.innerText = window.sessionStorage.getItem("addsPrice1");
+      li.appendChild(p1);
+      li.appendChild(p2);
+      feature.appendChild(li);
+    }
+
+    if(window.sessionStorage.getItem("addsName2")) {
+      let li = document.createElement("li");
+      let p1 = document.createElement("p");
+      p1.className = "name";
+      p1.innerText = window.sessionStorage.getItem("addsName2");
+      let p2 = document.createElement("p");
+      p2.className = "price";
+      p2.innerText = window.sessionStorage.getItem("addsPrice2");
+      li.appendChild(p1);
+      li.appendChild(p2);
+      feature.appendChild(li);
+    }
+
+    if(window.sessionStorage.getItem("addsName3")) {
+      let li = document.createElement("li");
+      let p1 = document.createElement("p");
+      p1.className = "name";
+      p1.innerText = window.sessionStorage.getItem("addsName3");
+      let p2 = document.createElement("p");
+      p2.className = "price";
+      p2.innerText = window.sessionStorage.getItem("addsPrice3");
+      li.appendChild(p1);
+      li.appendChild(p2);
+      feature.appendChild(li);
+    }
+
+    let total = document.getElementById("total");
+    let total_price = 0;
+    total_price += +slicecIt;
+    if(sessionStorage.getItem("addsPrice1")) {
+      total_price += +sessionStorage.getItem("addsPrice1").slice(sessionStorage.getItem("addsPrice1").indexOf("$") + 1, sessionStorage.getItem("addsPrice1").indexOf("/"));
+    }
+    if(sessionStorage.getItem("addsPrice2")) {
+      total_price += +sessionStorage.getItem("addsPrice2").slice(sessionStorage.getItem("addsPrice2").indexOf("$") + 1, sessionStorage.getItem("addsPrice2").indexOf("/"));
+    }
+    if(sessionStorage.getItem("addsPrice3")) {
+      total_price += +sessionStorage.getItem("addsPrice3").slice(sessionStorage.getItem("addsPrice3").indexOf("$") + 1, sessionStorage.getItem("addsPrice3").indexOf("/"));
+    }
+
+    total.innerHTML = `$${localStorage.getItem("tog") == "monthly" ? total_price + "/mo" : total_price - slicecIt + (slicecIt * 10) + "/yr"}`;
+
+    window.localStorage.getItem("toggle");
+
+
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+  <!-- Step 5 start -->
+
+  <!-- Thank you!
+
+  Thanks for confirming your subscription! We hope you have fun 
+  using our platform. If you ever need support, please feel free 
+  to email us at support@loremgaming.com. -->
+
+  <!-- Step 5 end -->

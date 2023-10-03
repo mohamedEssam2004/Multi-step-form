@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+    <main class="main_three">
+
+
+        <div class="navigation nav_three">
+          <div class="choise">
+            <a href="">1</a>
+            <div class="info">
+              <p>Step 1</p>
+              <h4>Your info</h4>
+            </div>
+          </div>
+    
+          <div class="choise">
+            <a href="">2</a>
+            <div class="info">
+              <p>Step 2</p>
+              <h4>Select plan</h4>
+            </div>
+          </div>
+          
+          <div class="choise">
+            <a href="" class="active">3</a>
+            <div class="info">
+              <p>Step 3</p>
+              <h4>Add-ons</h4>
+            </div>
+          </div>
+    
+          <div class="choise">
+            <a href="">4</a>
+            <div class="info">
+              <p>Step 4</p>
+              <h4>Summary</h4>
+            </div>
+          </div>
+        </div>
+    
+    
+    
+        <section class="content">
+          <div class="header">
+            <h1>Pick add-ons</h1>
+            <p>Add-ons help enhance your gaming experience.</p>
+          </div>
+    
+          <form class="adds">
+    
+            <input type="radio" name="online services" id="online-services">
+            <label for="online-services">
+                <div class="info">
+                    <h1>Online service</h1>
+                    <p>Access to multiplayer games</p>
+                </div>
+                <div class="price">+$1/mo</div>
+            </label>
+    
+            <input type="radio" name="larger storage" id="larger-storage">
+            <label for="larger-storage">
+                <div class="info">
+                    <h1>Larger storage</h1>
+                    <p>Extra 1TB of cloud save</p>
+                </div>
+                <div class="price">+$2/mo</div>
+            </label>
+    
+            <input type="radio" name="customizable profile" id="customizable-profile">
+            <label for="customizable-profile">
+                <div class="info">
+                    <h1>Customizable Profile</h1>
+                    <p>Custom theme on your profile</p>
+                </div>
+                <div class="price">+$2/mo</div>
+            </label>
+    
+    
+          </form>
+    
+          <div class="convey convey_three">
+            <a href="stem_two.html">Go Back</a>
+            <a href="step_four.html"><button id="btn3">Next Step</button></a>
+          </div>
+        </section>
+    
+    
+    
+      </main>
+
+
+      <script>
+
+
+        const btn3 = document.getElementById("btn3");
+        const picks = document.querySelectorAll(".content .adds input");
+        const picksArray = Array.from(picks);
+        const addsPrices = document.querySelectorAll(".adds label .price");
+        const addsPriceArray = Array.from(addsPrices);
+
+        console.log();
+
+        picksArray[0].onclick = function() {
+          if(picksArray[0].checked) {
+            console.log("checked1");
+            document.querySelectorAll('.content .adds label')[0].classList.add("active");
+            window.sessionStorage.setItem("addsBack1", getComputedStyle(picksArray[0].labels[0]).backgroundColor);
+            window.sessionStorage.setItem("addsBorder1", getComputedStyle(picksArray[0].labels[0]).borderColor);
+            window.sessionStorage.setItem("checked1", picksArray[0].labels[0].classList[1]);
+            window.sessionStorage.setItem("addsClass1", picksArray[0].labels[0].className);
+
+            window.sessionStorage.setItem("addsPrice1", picksArray[0].labels[0].children[1].innerHTML);
+            // console.log();
+
+            window.localStorage.getItem("addsBack1");
+            window.localStorage.getItem("addsBorder1");
+
+            window.sessionStorage.setItem("addsName1", picksArray[0].labels[0].children[0].children[0].innerHTML);
+            window.sessionStorage.setItem("addsPrice1", picksArray[0].labels[0].children[1].innerHTML);
+          }
+          loaction.reload();
+        }
+
+          picksArray[0].labels[0].style.backgroundColor = window.sessionStorage.getItem("addsBack1");
+          picksArray[0].labels[0].style.borderColor = window.sessionStorage.getItem("addsBorder1");
+          picksArray[0].labels[0].className = window.sessionStorage.getItem("addsClass1");
+          picksArray[0].labels[0].classList.add(sessionStorage.getItem("checked1"))
+
+
+        picksArray[1].onclick = function() {
+          if(picksArray[1].checked) {
+            document.querySelectorAll('.content .adds label')[1].classList.add("active");
+            window.sessionStorage.setItem("addsBack2", getComputedStyle(picksArray[1].labels[0]).backgroundColor);
+            window.sessionStorage.setItem("addsBorder2", getComputedStyle(picksArray[1].labels[0]).borderColor);
+            window.sessionStorage.setItem("checked2", picksArray[1].labels[0].classList[1]);
+            window.sessionStorage.setItem("addsClass2", picksArray[1].labels[0].className);
+
+            window.sessionStorage.setItem("addsPrice2", picksArray[1].labels[0].children[1].innerHTML);
+
+            window.sessionStorage.setItem("addsName2", picksArray[1].labels[0].children[0].children[0].innerHTML);
+            window.sessionStorage.setItem("addsPrice2", picksArray[1].labels[0].children[1].innerHTML);
+          }
+          loaction.reload();
+        }
+
+          picksArray[1].labels[0].style.backgroundColor = window.sessionStorage.getItem("addsBack2");
+          picksArray[1].labels[0].style.borderColor = window.sessionStorage.getItem("addsBorder2");
+          picksArray[1].labels[0].className = window.sessionStorage.getItem("addsClass2");
+          picksArray[1].labels[0].classList.add(sessionStorage.getItem("checked2"))
+
+
+        picksArray[2].onclick = function() {
+          if(picksArray[2].checked) {
+            document.querySelectorAll('.content .adds label')[2].classList.add("active");
+            window.sessionStorage.setItem("addsBack3", getComputedStyle(picksArray[2].labels[0]).backgroundColor);
+            window.sessionStorage.setItem("addsBorder3", getComputedStyle(picksArray[2].labels[0]).borderColor);
+            window.sessionStorage.setItem("checked3", picksArray[2].labels[0].classList[1]);
+            window.sessionStorage.setItem("addsClass3", picksArray[2].labels[0].className);
+
+            window.sessionStorage.setItem("addsPrice3", picksArray[2].labels[0].children[1].innerHTML);
+
+            window.sessionStorage.setItem("addsName3", picksArray[2].labels[0].children[0].children[0].innerHTML);
+            window.sessionStorage.setItem("addsPrice3", picksArray[2].labels[0].children[1].innerHTML);
+            picksArray[2].labels[0].classList.add(sessionStorage.getItem("checked3"))
+          }
+          location.reload();
+        }
+
+          picksArray[2].labels[0].style.backgroundColor = window.sessionStorage.getItem("addsBack3");
+          picksArray[2].labels[0].style.borderColor = window.sessionStorage.getItem("addsBorder3");
+          picksArray[2].labels[0].className = window.sessionStorage.getItem("addsClass3");
+          picksArray[2].labels[0].classList.add(sessionStorage.getItem("checked3"))
+
+
+
+
+        let addons_prices = Array.from(document.querySelectorAll("label .price"));
+        window.localStorage.getItem("toggle");
+
+        if(window.localStorage.getItem("toggle") == "yearly") {
+          addons_prices[0].innerHTML = "+$10/yr";
+          addons_prices[1].innerHTML = "+$20/yr";
+          addons_prices[2].innerHTML = "+$20/yr";
+        } else if(window.localStorage.getItem("toggle") == "monthly") {
+          addons_prices[0].innerHTML = "+$1/mo";
+          addons_prices[1].innerHTML = "+$2/mo";
+          addons_prices[2].innerHTML = "+$2/mo";
+        }
+
+        // for(let i = 0; i < addons_prices.length; i++) {
+        //   window.sessionStorage.setItem(`addons_price${i}`, addons_prices[i].innerHTML);
+        //   addons_prices[i].innerHTML =  window.sessionStorage.getItem(`addons_price${i}`);
+        // }
+        // picksArray[0].labels[0].classList.add("active")
+        console.log(picksArray[2].labels[0].classList)
+
+      </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

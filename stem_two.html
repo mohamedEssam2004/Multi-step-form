@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <main>
+
+
+    <div class="navigation nav_two">
+      <div class="choise">
+        <a href="">1</a>
+        <div class="info">
+          <p>Step 1</p>
+          <h4>Your info</h4>
+        </div>
+      </div>
+
+      <div class="choise">
+        <a href="" class="active">2</a>
+        <div class="info">
+          <p>Step 2</p>
+          <h4>Select plan</h4>
+        </div>
+      </div>
+      
+      <div class="choise">
+        <a href="">3</a>
+        <div class="info">
+          <p>Step 3</p>
+          <h4>Add-ons</h4>
+        </div>
+      </div>
+
+      <div class="choise">
+        <a href="">4</a>
+        <div class="info">
+          <p>Step 4</p>
+          <h4>Summary</h4>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section class="content content_two">
+      <div class="header">
+        <h1>Select your plan</h1>
+        <p>You have the option of monthly or yearly billing.</p>
+      </div>
+
+      <form class="plan">
+
+        <input type="radio" name="plan" id="arcade">
+        <label for="arcade">
+            <img src="./assets/images/icon-arcade.svg" alt="">
+            <div class="info">
+                <h1>Arcade</h1>
+                <p class="planPrice">$9/mo</p>
+                <p class="discount">2 months free</p>
+            </div>
+        </label>
+
+
+        <input type="radio" name="plan" id="advanced">
+        <label for="advanced">
+            <img src="./assets/images/icon-advanced.svg" alt="">
+            <div class="info">
+                <h1>Advanced</h1>
+                <p class="planPrice">$12/mo</p>
+                <p class="discount">2 months free</p>
+            </div>
+        </label>
+
+
+        <input type="radio" name="plan" id="pro">
+        <label for="pro">
+            <img src="./assets/images/icon-pro.svg" alt="">
+            <div class="info">
+                <h1>Pro</h1>
+                <p class="planPrice">$15/mo</p>
+                <p class="discount">2 months free</p>
+            </div>
+        </label>
+
+      </form>
+
+      <div class="togg">
+        <div class="toggler">
+          <p id="monthly">Monthly</p>
+          <div id="toggle_btn" class="monthly"></div>
+          <p id="yearly">Yearly</p>
+        </div>
+      </div>
+
+
+
+      <div class="convey">
+        <a href="index.html">Go Back</a>
+        <a href="step_three.html"><button id="btn2">Next Step</button></a>
+      </div>
+    </section>
+
+
+
+  </main>
+
+
+  <script>
+
+    const btn2 = document.getElementById("btn2");
+    const radios = document.querySelectorAll(".content .plan input");
+    const radiosArray = Array.from(radios);
+    const planPrices = document.querySelectorAll(".plan .info .planPrice");
+    const planPriceArray = Array.from(planPrices);
+
+    for(let i = 0; i < radiosArray.length; i++) {
+      if(radiosArray[i].checked) {
+        console.log("checked");
+        window.localStorage.setItem("radioBack", getComputedStyle(radiosArray[i].labels[0]).backgroundColor);
+        window.localStorage.setItem("radioBorder", getComputedStyle(radiosArray[i].labels[0]).borderColor);
+        window.localStorage.setItem("planName", radiosArray[i].labels[0].children[1].children[0].innerHTML);
+        window.localStorage.setItem("planPrice", planPriceArray[i].innerHTML);
+      }
+    }
+
+
+    const monthly = document.getElementById("monthly");
+    const yearly = document.getElementById("yearly");
+    const toggle_btn = document.getElementById("toggle_btn");
+
+    let discounts = Array.from(document.querySelectorAll(".discount"));
+
+    toggle_btn.onclick = function() {
+        if(toggle_btn.classList.contains("monthly")) {
+            toggle_btn.classList.remove("monthly");
+            toggle_btn.classList.add("yearly");
+            monthly.style.color = "var(--cool_Gray)";
+            yearly.style.color = "var(--marine_Blue)";
+            for(let i = 0; i < discounts.length; i++) {
+                discounts[i].classList.add("active");
+            }
+            saveData();
+        } else if(toggle_btn.classList.contains("yearly")) {
+            toggle_btn.classList.remove("yearly");
+            toggle_btn.classList.add("monthly");
+            yearly.style.color = "var(--cool_Gray)";
+            monthly.style.color = "var(--marine_Blue)";
+            for(let i = 0; i < discounts.length; i++) {
+                discounts[i].classList.remove("active");
+            }
+            saveData();
+        }
+        saveData();
+        location.reload();
+    }
+
+    monthly.onclick = function() {
+        toggle_btn.classList.remove("yearly");
+        toggle_btn.classList.add("monthly");
+        monthly.style.color = "var(--marine_Blue)";
+        yearly.style.color = "var(--cool_Gray)";
+        for(let i = 0; i < discounts.length; i++) {
+            discounts[i].classList.remove("active");
+        }
+        saveData();
+        location.reload();
+    }
+
+    yearly.onclick = function() {
+        toggle_btn.classList.remove("monthly");
+        toggle_btn.classList.add("yearly");
+        monthly.style.color = "var(--cool_Gray)";
+        yearly.style.color = "var(--marine_Blue)";
+        for(let i = 0; i < discounts.length; i++) {
+            discounts[i].classList.add("active");
+        }
+        saveData();
+        location.reload();
+    }
+
+
+
+    function saveData() {
+      window.localStorage.setItem("tog", toggle_btn.className);
+      window.localStorage.setItem("mon", getComputedStyle(monthly).color);
+      window.localStorage.setItem("yea", getComputedStyle(yearly).color);
+    }
+    function showData() {
+      toggle_btn.className = window.localStorage.getItem("tog");
+      monthly.style.color = window.localStorage.getItem("mon");
+      yearly.style.color = window.localStorage.getItem("yea");
+    }
+    showData();
+
+    window.localStorage.setItem("toggle", toggle_btn.className);
+
+
+      radiosArray[0].onclick = function() {
+          if(radiosArray[0].checked) {
+          window.sessionStorage.setItem("radioBack1", getComputedStyle(radiosArray[0].labels[0]).backgroundColor);
+          window.sessionStorage.setItem("radioBorder1", getComputedStyle(radiosArray[0].labels[0]).borderColor);
+
+          window.sessionStorage.removeItem("radioBack2");
+          window.sessionStorage.removeItem("radioBack3");
+
+          window.sessionStorage.removeItem("radioBorder2");
+          window.sessionStorage.removeItem("radioBorder3");
+        }
+        location.reload(); 
+      }
+
+      radiosArray[0].labels[0].style.backgroundColor = window.sessionStorage.getItem("radioBack1");
+      radiosArray[0].labels[0].style.borderColor = window.sessionStorage.getItem("radioBorder1");
+
+
+      radiosArray[1].onclick = function() {
+          if(radiosArray[1].checked) {
+            window.sessionStorage.setItem("radioBack2", getComputedStyle(radiosArray[1].labels[0]).backgroundColor);
+            window.sessionStorage.setItem("radioBorder2", getComputedStyle(radiosArray[1].labels[0]).borderColor);
+
+            window.sessionStorage.removeItem("radioBack1");
+            window.sessionStorage.removeItem("radioBack3");
+
+            window.sessionStorage.removeItem("radioBorder1");
+            window.sessionStorage.removeItem("radioBorder3");
+          }
+          location.reload(); 
+      }
+
+      radiosArray[1].labels[0].style.backgroundColor = window.sessionStorage.getItem("radioBack2");
+      radiosArray[1].labels[0].style.borderColor = window.sessionStorage.getItem("radioBorder2");
+
+      radiosArray[2].onclick = function() {
+            if(radiosArray[2].checked) {
+            window.sessionStorage.setItem("radioBack3", getComputedStyle(radiosArray[2].labels[0]).backgroundColor);
+            window.sessionStorage.setItem("radioBorder3", getComputedStyle(radiosArray[2].labels[0]).borderColor);
+
+
+            window.sessionStorage.removeItem("radioBack1");
+            window.sessionStorage.removeItem("radioBack2");
+
+            window.sessionStorage.removeItem("radioBorder1");
+            window.sessionStorage.removeItem("radioBorder2");
+          }
+          location.reload(); 
+      }
+
+      radiosArray[2].labels[0].style.backgroundColor = window.sessionStorage.getItem("radioBack3");
+      radiosArray[2].labels[0].style.borderColor = window.sessionStorage.getItem("radioBorder3");
+  </script>
+
+</body>
+</html>
+
+
+
